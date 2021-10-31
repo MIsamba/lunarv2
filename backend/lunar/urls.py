@@ -1,3 +1,7 @@
+from django.urls import path
+from . import views
+
 urlpatterns = [
-    re_path (r'^', include('lunar.urls')),
+    path('', views.getRoutes, name="routes"),
+    path('<str:course_name>', views.getCouses),
 ]
