@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
 
-urlpatterns = [
+#url path
+urlpatterns = [ 
+
     path('', views.getRoutes, name="routes"),
-    path('<str:course_name>', views.getCouses),
-]
+    path('courses/',views.getCourses , name = "courses"),
+    path('classes/',views.getClasses , name = "classes"),
+    path('student/',views.getStudent , name = "courses"),
+  ]

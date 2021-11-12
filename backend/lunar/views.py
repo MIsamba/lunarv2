@@ -1,20 +1,37 @@
 from django.shortcuts import render
-from django.http import JsonResponse,HttpResponse
+from .models import Course,Classes,Student
+from .serializers import CourseSerializer,ClassesSerializer,StudentSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 # Create your views here.
 
-import json
-from .models import Course
-
+@api_view(['GET'])
 def getRoutes(request):
-    return JsonResponse("Hello", safe=False)
+  routes = [
+    '/api/courses/'
+    '/api/classes/'
+    '/api/student/'
 
-def getCouses(request, course_name):
-    if request.method == "GET" :
-        try:
-          Course = course_name.objects.get(name = course_name)
-          response = json.dump([{ 'Course Name': Course.course_name,'Number of Students': Course.course_total }])
-        except:
-          response = json.dumps([{'Error': 'No couses with that name'}])
-   
-    return HttpResponse(response,content_type='text/json')
+  ]
+  return Response (routes)
+
+
+@api_view(['GET'])
+def getCourses(request):
+    courses = Course.objects.all()
+    serializer = CourseSerializer(courses, many =True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getClasses(request):
+    classes = Classes.objects.all()
+    serializer = ClassesSerializer(classes, many =True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getStudent(request):
+    student = Student.objects.all()
+    serializer = StudentSerializer(student, many =True)
+    return Response(serializer.data)
