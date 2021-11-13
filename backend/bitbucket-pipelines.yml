@@ -1,0 +1,10 @@
+script: 
+- pipe: atlassian/aws-s3-deploy:1.1.0
+  variables:
+    AWS_ACCESS_KEY_ID: 'AKIAVEZHER37H6LTAK4N' # Optional if already defined in the context or OIDC used.
+    AWS_SECRET_ACCESS_KEY: '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' # Optional if already defined in the context or OIDC used.
+    AWS_DEFAULT_REGION: 'us-east-2' # Optional if already defined in the context or OIDC used.
+  #  AWS_OIDC_ROLE_ARN: '<string>' # Optional by default. Required for OpenID Connect (OIDC) authentication.
+    S3_BUCKET: 'moontechbucket'
+    LOCAL_PATH: 'build'
+   
