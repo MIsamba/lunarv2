@@ -7,4 +7,4 @@ script:
   #  AWS_OIDC_ROLE_ARN: '<string>' # Optional by default. Required for OpenID Connect (OIDC) authentication.
     S3_BUCKET: 'moontechbucket'
     LOCAL_PATH: 'build'
-   
+  
