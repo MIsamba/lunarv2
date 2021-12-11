@@ -12,4 +12,13 @@ urlpatterns = [
     path('courses/',views.getCourses , name = "courses"),
     path('classes/',views.getClasses , name = "classes"),
     path('student/',views.getStudent , name = "students"),
+    path('teachers/',views.getStudent , name = "teachers"),
+    path('subjects/',views.getSubject , name = "Subjects"),
+    path('results/',views.getResults , name = "Results"),
+    path('attendance/',views.getAttendance , name = "Attendance"),
+    path('AttendanceReport/',views.getAttendanceReport , name = "AttendanceReport"),
+    path('Appointment/',views.getAppointment , name = "Appointment"),
+    path('Notifications/',views.getNotifications , name = "Notifications"),
+
+
   ]
