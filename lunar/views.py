@@ -30,7 +30,15 @@ def registerUser(request):
         first_name = data['name'],
         username=data['email'],
         email=data['email'],
-        password=make_password(data['password'])
+        phoneNumber=data['phoneNumber'],
+        Id_number=data['Id_number'],
+        college=data['college'],
+        course=data['course'],
+        year_of_enrollment=data['year_of_enrollment'],
+        profile_photo=data['profile_photo'],
+        gender=data['gender'],
+        password=make_password(data['password']),
+       
     )
     serializer = UserSerializerWithToken(user, many=False)
     return Response('serializer.data')
@@ -108,3 +116,4 @@ def getNotifications(request):
     notifications = Notifications.objects.all()
     serializer = NotificationsSerializer(notifications, many =True)
     return Response(serializer.data)
+
