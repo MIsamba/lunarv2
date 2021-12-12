@@ -5,10 +5,12 @@ from rest_framework_simplejwt.views import (
 )
 #url path
 urlpatterns = [ 
-    path('api/users/login/', TokenObtainPairView.as_view(),
+    path('api/users/login/', views.MyTokenObtainPairView.as_view(),
      name='token_obtain_pair'),
 
-    path('', views.getRoutes, name="routes"),
+    path('users/profile/',views.getUserProfile , name = "users-profile"),
+    path('users/register',views.registerUser, name = "users-register"),
+    
     path('courses/',views.getCourses , name = "courses"),
     path('classes/',views.getClasses , name = "classes"),
     path('student/',views.getStudent , name = "students"),

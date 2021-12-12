@@ -1,27 +1,46 @@
 from django.shortcuts import render
-from .models import Course, Classes, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notifications
-from .serializers import CourseSerializer,ClassesSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,AttendanceReportSerializer,AppointmentSerializer,NotificationsSerializer
+from rest_framework import serializers
+from .models import User,Course, Classes, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notifications
+from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,ClassesSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,AttendanceReportSerializer,AppointmentSerializer,NotificationsSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from django.contrib.auth.hashers import make_password
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+   def validate(self, attrs):
+       data = super().validate(attrs)
+
+       data['username'] = self.user.username
+       data['email'] = self.user.email
+       return data
+        
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
 
 # Create your views here.
 
-@api_view(['GET'])
-def getRoutes(request):
-  routes = [
-    '/api/courses/'
-    '/api/classes/'
-    '/api/student/'
-    '/api/teacher/'
-    '/api/subject'
-    '/api/results'
-    '/api/attendance'
-    '/api/AttendanceReport'
-    '/api/Appointment'
-    '/api/Notifications'
+@api_view(['POST'])
+def registerUser(request):
+    data = request.data
 
-  ]
-  return Response (routes)
+    user = User.objects.create(
+        first_name = data['name'],
+        username=data['email'],
+        email=data['email'],
+        password=make_password(data['password'])
+    )
+    serializer = UserSerializerWithToken(user, many=False)
+    return Response('serializer.data')
+
+@api_view(['GET'])
+def getUserProfile(request):
+    user = request.user
+    serializer = UserSerializer(user, many =False)
+    return Response(serializer.data)
+
 
 
 @api_view(['GET'])

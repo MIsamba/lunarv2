@@ -1,5 +1,32 @@
 from rest_framework import serializers
-from .models import Course,Classes,Student,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notifications
+from .models import User,Course,Classes,Student,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notifications
+
+#User serializer
+
+class UserSerializer(serializers.ModelSerializer):
+   # name = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = User
+        fields = ['id','username','email']
+    
+'''    def get_name(self, obj):
+        name = obj.first_name
+        if name == '':
+            name = obj.email
+        return name 
+'''
+class UserSerializerWithToken(UserSerializer):
+    token = serializers.SerializerMethodField(read_only=True)
+  
+    class Meta:
+        model = User
+        fields = ['id','_id', 'username', 'email', 'name', 'isAdmin', 'token']
+
+    def get_token(self, obj):
+        token = RefreshToken.for_user(obj)
+        return str(token.access_token)
+       
+
 
 #course serializer
 
