@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework import serializers
+from rest_framework.response import Response
 from .models import User,Course, Classes, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notifications
 from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,ClassesSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,AttendanceReportSerializer,AppointmentSerializer,NotificationsSerializer
 from rest_framework.decorators import api_view
@@ -10,25 +11,27 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.hashers import make_password
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
-   def validate(self, attrs):
-       data = super().validate(attrs)
+    def validate(self, attrs):
+        data = super().validate(attrs)
 
-       data['username'] = self.user.username
-       data['email'] = self.user.email
-       return data
-        
+        serializer = UserSerializerWithToken(self.user).data
+        for k, v in serializer.items():
+            data[k] = v
+
+        return data
+
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 # Create your views here.
 
+
 @api_view(['POST'])
 def registerUser(request):
     data = request.data
-
     user = User.objects.create(
         first_name = data['name'],
-        username=data['email'],
+        username=data['username'],
         email=data['email'],
         phoneNumber=data['phoneNumber'],
         Id_number=data['Id_number'],
@@ -37,11 +40,11 @@ def registerUser(request):
         year_of_enrollment=data['year_of_enrollment'],
         profile_photo=data['profile_photo'],
         gender=data['gender'],
-        password=make_password(data['password']),
-       
+        password=make_password(data['password'])
     )
+
     serializer = UserSerializerWithToken(user, many=False)
-    return Response('serializer.data')
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def getUserProfile(request):

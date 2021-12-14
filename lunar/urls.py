@@ -9,7 +9,7 @@ urlpatterns = [
      name='token_obtain_pair'),
 
     path('users/profile/',views.getUserProfile , name = "users-profile"),
-    path('users/register',views.registerUser, name = "users-register"),
+    path('users/register/',views.registerUser, name = "users-register"),
     
     path('courses/',views.getCourses , name = "courses"),
     path('classes/',views.getClasses , name = "classes"),
