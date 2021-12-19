@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import serializers
 from rest_framework.response import Response
-from .models import User,Course, Classes, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notifications
-from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,ClassesSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,AttendanceReportSerializer,AppointmentSerializer,NotificationsSerializer
+from .models import User,Course, Classes, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notification
+from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,ClassesSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,AttendanceReportSerializer,AppointmentSerializer,NotificationSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -115,8 +115,8 @@ def getAppointment(request):
 
 
 @api_view(['GET'])
-def getNotifications(request):
-    notifications = Notifications.objects.all()
-    serializer = NotificationsSerializer(notifications, many =True)
+def getNotification(request):
+    notification = Notification.objects.all()
+    serializer = NotificationSerializer(notification, many =True)
     return Response(serializer.data)
 

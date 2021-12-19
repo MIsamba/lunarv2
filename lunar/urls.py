@@ -20,7 +20,7 @@ urlpatterns = [
     path('attendance/',views.getAttendance , name = "Attendance"),
     path('AttendanceReport/',views.getAttendanceReport , name = "AttendanceReport"),
     path('Appointment/',views.getAppointment , name = "Appointment"),
-    path('Notifications/',views.getNotifications , name = "Notifications"),
+    path('Notification/',views.getNotification , name = "Notification"),
 
 
   ]

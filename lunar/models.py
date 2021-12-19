@@ -103,13 +103,12 @@ class Appointment(models.Model):
         return self.appointment_message
 
 #Notifications model
-class Notifications(models.Model):
-    Course_name = models.CharField(max_length=200,null=True,blank=True)
-    Tutor = models.CharField(max_length=200,null=True,blank=True)
-    Course_Code = models.IntegerField()
-    Venue = models.CharField(max_length=200,null=True,blank=True)
-
-    Time=models.IntegerField()
+class Notification(models.Model):
+    course_name = models.CharField(max_length=200,blank='True', null= 'True',default=" DEFAULT VALUE")
+    tutor = models.CharField(max_length=200,null=False,blank=True)
+    course_code = models.IntegerField()
+    venue = models.CharField(max_length=200,null=False,blank=True)
+    time=models.IntegerField()
 
     def __str__(self):
-        return self.Course_name
+        return self.course_name
