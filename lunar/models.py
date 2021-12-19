@@ -104,9 +104,12 @@ class Appointment(models.Model):
 
 #Notifications model
 class Notifications(models.Model):
-    id = models.AutoField(primary_key=True)
-    student_id = models.ForeignKey(Student, on_delete=models.CASCADE)
-    message = models.TextField()
+    Course_name = models.CharField(max_length=200,null=True,blank=True)
+    Tutor = models.CharField(max_length=200,null=True,blank=True)
+    Course_Code = models.IntegerField()
+    Venue = models.CharField(max_length=200,null=True,blank=True)
+
+    Time=models.IntegerField()
 
     def __str__(self):
-        return self.message
+        return self.Course_name
