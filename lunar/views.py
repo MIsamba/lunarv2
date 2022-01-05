@@ -33,14 +33,14 @@ def registerUser(request):
         first_name = data['name'],
         username=data['username'],
         email=data['email'],
-        phoneNumber=data['phoneNumber'],
-        Id_number=data['Id_number'],
-        college=data['college'],
-        course=data['course'],
-        year_of_enrollment=data['year_of_enrollment'],
-        profile_photo=data['profile_photo'],
-        gender=data['gender'],
-        password=make_password(data['password'])
+       # phoneNumber=data['phoneNumber'],
+       # Id_number=data['Id_number'],
+       # college=data['college'],
+       # course=data['course'],
+       # year_of_enrollment=data['year_of_enrollment'],
+       # profile_photo=data['profile_photo'],
+       # gender=data['gender'],
+       # password=make_password(data['password'])
     )
 
     serializer = UserSerializerWithToken(user, many=False)
