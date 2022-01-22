@@ -12,7 +12,7 @@ urlpatterns = [
     path('users/register/',views.registerUser, name = "users-register"),
     
     path('courses/',views.getCourses , name = "courses"),
-    path('classes/',views.getClasses , name = "classes"),
+    path('session/',views.getSession , name = "session"),
     path('student/',views.getStudent , name = "students"),
     path('teachers/',views.getStudent , name = "teachers"),
     path('subjects/',views.getSubject , name = "Subjects"),
@@ -20,7 +20,6 @@ urlpatterns = [
     path('attendance/',views.getAttendance , name = "Attendance"),
     path('AttendanceReport/',views.getAttendanceReport , name = "AttendanceReport"),
     path('Appointment/',views.getAppointment , name = "Appointment"),
-    path('Notification/',views.getNotification , name = "Notification"),
-
+   
 
   ]

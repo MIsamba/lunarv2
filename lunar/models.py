@@ -10,16 +10,17 @@ class Course(models.Model):
 
     def __str__(self):
         return self.course_name
-#Classes model
-class Classes(models.Model):
-    class_name = models.CharField(max_length=200, null=True, blank=True)
-    class_code = models.IntegerField()
-    class_assignments_written = models.CharField(max_length=200, null=True,blank=True)
-    class_assignment_image = models.ImageField(null=True, blank=True,default='/placeholder.png')
-    class_attendance = models.CharField(max_length=200, null=True,blank=True)
+#Class model
+class Session(models.Model):
+    course_name = models.CharField(max_length=200,blank='True', null= 'True',default=" DEFAULT VALUE")
+    tutor = models.CharField(max_length=200,null=False,blank=True)
+    course_code = models.IntegerField()
+    venue = models.CharField(max_length=200,null=False,blank=True)
+    time = models.IntegerField()
+    phone_no = models.IntegerField()
 
     def __str__(self):
-        return self.class_name
+        return self.course_name
 
 
 
@@ -102,13 +103,39 @@ class Appointment(models.Model):
     def __str__(self):
         return self.appointment_message
 
-#Notifications model
-class Notification(models.Model):
-    course_name = models.CharField(max_length=200,blank='True', null= 'True',default=" DEFAULT VALUE")
-    tutor = models.CharField(max_length=200,null=False,blank=True)
-    course_code = models.IntegerField()
-    venue = models.CharField(max_length=200,null=False,blank=True)
-    time=models.IntegerField()
+
+class Posts(models.Model):
+    image = models.FileField(null=True, blank=True)
+    description = models.CharField(max_length=200, null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
-        return self.course_name
+        return str(self.description)
+
+
+class Documents(models.Model):
+    course = models.CharField(max_length=200, null=True, blank=True)
+    course_code = models.IntegerField(null=True, blank=True, default=0)
+    dox_purpose = models.CharField(max_length=200, null=True, blank=True)
+    attachment = models.FileField(null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    _id = models.AutoField(primary_key=True, editable=False)
+
+    def __str__(self):
+        return str(self.course)
+
+class Assignments(models.Model):
+    course = models.CharField(max_length=200, null=True, blank=True)
+    course_code = models.IntegerField(null=True, blank=True, default=0)
+    dox_purpose = models.CharField(max_length=200, null=True, blank=True)
+    Due = models.DateTimeField(null=True, blank=True)
+    attachment = models.FileField(null=True, blank=True)
+    createdAt = models.DateTimeField(auto_now_add=True)
+    _id = models.AutoField(primary_key=True, editable=False)
+
+    def __str__(self):
+        return str(self.course)
+
+
+

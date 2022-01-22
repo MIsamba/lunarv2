@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import serializers
 from rest_framework.response import Response
-from .models import User,Course, Classes, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Notification
-from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,ClassesSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,AttendanceReportSerializer,AppointmentSerializer,NotificationSerializer
+from .models import Posts,Documents, User,Course, Session, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
+from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,SessionSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -32,15 +32,15 @@ def registerUser(request):
     user = User.objects.create(
        # first_name = data['name'],
         username=data['username'],
-        #email=data['email'],
-        #phoneNumber=data['phoneNumber'],
-        #idnumber=data['idnumber'],
-        #college=data['college'],
-        #course=data['course'],
-        #year_of_enrollment=data['year_of_enrollment'],
-        #profile_photo=data['profile_photo'],
-        #gender=data['gender'],
-        #password=make_password(data['password'])
+        email=data['email'],
+        phoneNumber=data['phoneNumber'],
+        idnumber=data['idnumber'],
+        college=data['college'],
+        course=data['course'],
+        year_of_enrollment=data['year_of_enrollment'],
+        profile_photo=data['profile_photo'],
+        gender=data['gender'],
+        password=make_password(data['password'])
     )
 
     serializer = UserSerializerWithToken(user, many=False)
@@ -62,9 +62,9 @@ def getCourses(request):
 
 
 @api_view(['GET'])
-def getClasses(request):
-    classes = Classes.objects.all()
-    serializer = ClassesSerializer(classes, many =True)
+def getSession(request):
+    session = Session.objects.all()
+    serializer = SessionSerializer(session, many =True)
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -114,9 +114,23 @@ def getAppointment(request):
     return Response(serializer.data)
 
 
+
 @api_view(['GET'])
-def getNotification(request):
-    notification = Notification.objects.all()
-    serializer = NotificationSerializer(notification, many =True)
+def getPosts(request):
+    posts = Posts.objects.all()
+    serializer = PostsSerializer(posts, many =True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+def getDocuments(request):
+    documents = Documents.objects.all()
+    serializer = DocumentsSerializer(documents, many =True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAssignments(request):
+    assignments = Assignments.objects.all()
+    serializer = AssignmentsSerializer(assignments, many =True)
+    return Response(serializer.data)
