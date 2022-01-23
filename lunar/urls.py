@@ -18,8 +18,12 @@ urlpatterns = [
     path('subjects/',views.getSubject , name = "Subjects"),
     path('results/',views.getResults , name = "Results"),
     path('attendance/',views.getAttendance , name = "Attendance"),
-    path('AttendanceReport/',views.getAttendanceReport , name = "AttendanceReport"),
-    path('Appointment/',views.getAppointment , name = "Appointment"),
+    path('attendanceReport/',views.getAttendanceReport , name = "AttendanceReport"),
+    path('appointment/',views.getAppointment , name = "Appointment"),
+    path('documents/',views.getDocuments , name = "Documents"),
+    path('assignments/',views.getAssignments , name = "Assignments"),
+    path('posts/',views.getPosts , name = "Posts"),
+    
    
 
   ]

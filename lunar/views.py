@@ -30,7 +30,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 def registerUser(request):
     data = request.data
     user = User.objects.create(
-       # first_name = data['name'],
+        first_name = data['name'],
         username=data['username'],
         email=data['email'],
         phoneNumber=data['phoneNumber'],
@@ -38,7 +38,7 @@ def registerUser(request):
         college=data['college'],
         course=data['course'],
         year_of_enrollment=data['year_of_enrollment'],
-        profile_photo=data['profile_photo'],
+        #profile_photo=data['profile_photo'],
         gender=data['gender'],
         password=make_password(data['password'])
     )
