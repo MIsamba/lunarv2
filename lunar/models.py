@@ -105,31 +105,30 @@ class Appointment(models.Model):
 
 
 class Posts(models.Model):
-    image = models.FileField(null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    avater = models.FileField(null=True, blank=True)
+    photo = models.FileField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
-        return str(self.description)
+        return str(self.name)
 
 
 class Documents(models.Model):
-    course = models.CharField(max_length=200, null=True, blank=True)
-    course_code = models.IntegerField(null=True, blank=True, default=0)
-    dox_purpose = models.CharField(max_length=200, null=True, blank=True)
-    attachment = models.FileField(null=True, blank=True)
+    name = models.CharField(max_length=200, null=True, blank=True)
+    type = models.CharField(max_length=200, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
-        return str(self.course)
+        return str(self.name)
 
 class Assignments(models.Model):
     course = models.CharField(max_length=200, null=True, blank=True)
-    course_code = models.IntegerField(null=True, blank=True, default=0)
-    dox_purpose = models.CharField(max_length=200, null=True, blank=True)
-    Due = models.DateTimeField(null=True, blank=True)
+    type = models.CharField(max_length=200, null=True, blank=True)
+    due = models.DateTimeField(null=True, blank=True)
     attachment = models.FileField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
