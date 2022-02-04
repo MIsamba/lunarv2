@@ -105,9 +105,16 @@ class  AppointmentSerializer(serializers.ModelSerializer):
 #Posts serializer
 class  PostsSerializer(serializers.ModelSerializer):
     
+    avater = serializers.ImageField(use_url = True)
+    #avater = serializers.SerializerMethodField('get_avater')
+
     class Meta:
         model = Posts
         fields = '__all__'
+
+    #def get_avater(self, obj):
+     # return obj.avater.url
+
 
 #Documents serializer
 class  DocumentsSerializer(serializers.ModelSerializer):
