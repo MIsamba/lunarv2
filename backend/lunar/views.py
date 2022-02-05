@@ -43,7 +43,7 @@ def registerUser(request):
         password=make_password(data['password'])
     )
 
-    serializer = UserSerializerWithToken(user, many=False)
+    serializer = UserSerializerWithToken(user, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
