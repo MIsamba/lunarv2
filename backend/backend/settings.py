@@ -134,26 +134,45 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-MEDIA_ROOT = BASE_DIR / 'static/images'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+#MEDIA_ROOT = BASE_DIR / 'static/images'
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+#STATIC_URL = '/static/'
+
+#MEDIA_URL = '/images/'
+
+#STATICFILES_DIRS = [
+    #os.path.join(BASE_DIR, 'static')
+ ##  BASE_DIR / 'frontend/build/static'
+    
+#]
+
+
+#MEDIA_ROOT = BASE_DIR / 'static/images'
+#STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+#CORS_ALLOW_ALL_ORIGINS = True
+
+#new
 
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, 'static')
     BASE_DIR / 'static',
     BASE_DIR / 'frontend/build/static'
-    
 ]
 
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
 CORS_ALLOW_ALL_ORIGINS = True
+
+
+
 
 
 # Default primary key field type
