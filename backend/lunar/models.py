@@ -2,6 +2,26 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
+
+#Student model
+class Students(models.Model):
+        first_name = models.CharField(max_length=200,null=True,blank=True)
+        username=models.CharField(max_length=200,null=True,blank=True)
+        email=models.CharField(max_length=200,null=True,blank=True)
+        phoneNumber=models.CharField(max_length=200,null=True,blank=True)
+        student_id=models.CharField(max_length=200,null=True,blank=True)
+        college=models.CharField(max_length=200,null=True,blank=True)
+        course= models.CharField(max_length=200,null=True,blank=True)
+        year_of_enrollment=models.CharField(max_length=200,null=True,blank=True)
+        profile_photo=models.CharField(max_length=200,null=True,blank=True)
+        gender=models.CharField(max_length=200,null=True,blank=True)
+        password=models.CharField(max_length=200,null=True,blank=True)
+
+        def __str__(self):
+                return self.email
+
+
+
 #Course model
 class Course(models.Model):
     course_code = models.IntegerField()

@@ -13,7 +13,8 @@ urlpatterns = [
     
     path('courses/',views.getCourses , name = "courses"),
     path('session/',views.getSession , name = "session"),
-    path('student/',views.getStudent , name = "students"),
+    path('student/',views.getStudent , name = "student"),
+    path('students/',views.getStudents , name = "students"),
     path('teachers/',views.getStudent , name = "teachers"),
     path('subjects/',views.getSubject , name = "Subjects"),
     path('results/',views.getResults , name = "Results"),

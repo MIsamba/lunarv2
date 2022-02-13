@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import  Posts,Assignments,Documents, User,Course,Session,Student,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
+from .models import  Posts,Assignments,Documents, User,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
 
 #User serializer
 
@@ -53,6 +53,14 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = '__all__'
+#student serializer
+
+class StudentsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Students
+        fields = '__all__'
+
 
         
 #Teacher serializer

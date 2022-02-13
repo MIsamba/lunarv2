@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import serializers
 from rest_framework.response import Response
-from .models import Posts,Documents, User,Course, Session, Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
-from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,SessionSerializer,StudentSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
+from .models import Posts,Documents, User,Course, Session, Students,Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
+from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,SessionSerializer,StudentSerializer,StudentsSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -73,6 +73,14 @@ def getStudent(request):
     serializer = StudentSerializer(student, many =True)
     return Response(serializer.data)
 
+
+@api_view(['GET','POST'])
+def getStudents(request):
+    students = Students.objects.all()
+    serializer = StudentsSerializer(students, many =True)
+    return Response(serializer.data)
+
+
 @api_view(['GET'])
 def getTeacher(request):
     teacher = Teacher.objects.all()
@@ -129,7 +137,7 @@ def getDocuments(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+@api_view(['GET','POST'])
 def getAssignments(request):
     assignments = Assignments.objects.all()
     serializer = AssignmentsSerializer(assignments, many =True)
