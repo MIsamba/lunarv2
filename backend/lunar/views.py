@@ -8,6 +8,13 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+
+from rest_framework import viewsets
+from .serializers import HeroSerializer
+from .models import Hero
+
+
+
 from django.contrib.auth.hashers import make_password
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -22,6 +29,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+
+#hero test
+class HeroViewSet(viewsets.ModelViewSet):
+    queryset = Hero.objects.all().order_by('name')
+    serializer_class = HeroSerializer
 
 # Create your views here.
 

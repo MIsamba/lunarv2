@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import  Posts,Assignments,Documents, User,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
+from .models import  Hero,Posts,Assignments,Documents, User,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
 
 #User serializer
 
@@ -29,7 +29,11 @@ class UserSerializerWithToken(UserSerializer):
         return str(token.access_token)
        
 
-
+#hero
+class HeroSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Hero
+        fields = '__all__'
 #course serializer
 
 class CourseSerializer(serializers.ModelSerializer):
