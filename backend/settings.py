@@ -15,7 +15,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
@@ -53,8 +53,8 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,33 +130,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.2/howto/static-files/
-
-#MEDIA_ROOT = BASE_DIR / 'static/images'
-#STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-#STATIC_URL = '/static/'
-
-#MEDIA_URL = '/images/'
-
-#STATICFILES_DIRS = [
-    #os.path.join(BASE_DIR, 'static')
- ##  BASE_DIR / 'frontend/build/static'
-    
-#]
-
-
-#MEDIA_ROOT = BASE_DIR / 'static/images'
-#STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-
-#CORS_ALLOW_ALL_ORIGINS = True
-
-#new
-
 
 
 
