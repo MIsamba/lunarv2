@@ -22,6 +22,7 @@ function App() {
     <div className="App">
       <Router>
       <Header />
+      <Sidebar />
       <main>
               <Container>
 
@@ -37,7 +38,6 @@ function App() {
                 <Route path="/classes" exact component={classes} />
             <Navbar/>
 
-            <Footer />
             </Container>
        </main>
 
