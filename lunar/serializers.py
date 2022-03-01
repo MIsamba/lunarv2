@@ -55,9 +55,12 @@ from .models import  Hero,Posts,Assignments,Documents, User,Course,Session,Stude
 
 #hero
 class HeroSerializer(serializers.HyperlinkedModelSerializer):
-    """class Meta:
+    class Meta:
         model = Hero
         fields = '__all__'
+
+
+
 """
     def create(self, validated_data):
         hero = Hero.objects.create_hero(**validated_data)
@@ -74,7 +77,7 @@ class HeroSerializer(serializers.HyperlinkedModelSerializer):
         ]
 
 
-
+"""
 
 
 
