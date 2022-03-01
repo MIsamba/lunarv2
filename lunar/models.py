@@ -23,8 +23,8 @@ class Students(models.Model):
 
 #hero model
 class Hero(models.Model):
-    name = models.CharField(max_length=60)
-    alias = models.CharField(max_length=60)
+    name = models.CharField(max_length=60,null=True)
+    alias = models.CharField(max_length=60,null=True)
     first_name = models.CharField(max_length=200,null=True,blank=True)
     username=models.CharField(max_length=200,null=True,blank=True)
     email=models.CharField(max_length=200,null=True,blank=True)
