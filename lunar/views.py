@@ -2,17 +2,16 @@ from django.shortcuts import render
 from rest_framework import serializers
 from rest_framework.response import Response
 from .models import Posts,Documents, User,Course, Session, Students,Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
-from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,SessionSerializer,StudentSerializer,StudentsSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
+from .serializers import HeroSerializer,CourseSerializer,SessionSerializer,StudentSerializer,StudentsSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser,IsAuthenticated
 
 
 from rest_framework import viewsets
-from .serializers import HeroSerializer
 from .models import Hero
 
 
@@ -22,15 +21,15 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.views import APIView
 
 class UserRecordView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     def get(self, format=None):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
+        heros = Hero.objects.all()
+        serializer = HeroSerializer(heros, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = HeroSerializer(data=request.data)
         if serializer.is_valid(raise_exception=ValueError):
             serializer.create(validated_data=request.data)
             return Response(

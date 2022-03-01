@@ -17,7 +17,7 @@ from .models import  Hero,Posts,Assignments,Documents, User,Course,Session,Stude
    
 
 
-class UserSerializer(serializers.ModelSerializer):
+"""class UserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
@@ -36,9 +36,10 @@ class UserSerializer(serializers.ModelSerializer):
             )
         ]
 
+"""
 
 
-class UserSerializerWithToken(UserSerializer):
+"""class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
   
     class Meta:
@@ -50,12 +51,35 @@ class UserSerializerWithToken(UserSerializer):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
 
+"""
 
 #hero
 class HeroSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
+    """class Meta:
         model = Hero
         fields = '__all__'
+"""
+    def create(self, validated_data):
+        hero = Hero.objects.create_hero(**validated_data)
+        return hero
+
+    class Meta:
+        model = Hero
+        fields = '__all__' 
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Hero.objects.all(),
+                fields=['id', 'password']
+            )
+        ]
+
+
+
+
+
+
+
+
 #course serializer
 
 class CourseSerializer(serializers.ModelSerializer):
