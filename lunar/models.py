@@ -143,6 +143,7 @@ class Appointment(models.Model):
         return self.appointment_message
 
 
+
 class Posts(models.Model):
     description = models.CharField(max_length=200, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)

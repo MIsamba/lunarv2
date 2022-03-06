@@ -60,6 +60,15 @@ class HeroSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 
+class  PostsSerializer(serializers.HyperlinkedModelSerializer):
+    
+    
+    class Meta:
+        model = Posts
+        fields = '__all__'
+
+    #def get_avater(self, obj):
+     # return obj.avater.url
 
 """
     def create(self, validated_data):
@@ -162,7 +171,7 @@ class  AppointmentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
+'''
 #Posts serializer
 class  PostsSerializer(serializers.ModelSerializer):
     
@@ -176,6 +185,7 @@ class  PostsSerializer(serializers.ModelSerializer):
     #def get_avater(self, obj):
      # return obj.avater.url
 
+'''
 
 #Documents serializer
 class  DocumentsSerializer(serializers.ModelSerializer):

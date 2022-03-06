@@ -69,6 +69,21 @@ class HeroViewSet(viewsets.ModelViewSet):
     queryset = Hero.objects.all().order_by('name')
     serializer_class = HeroSerializer
 
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Posts.objects.all()
+    serializer_class = PostsSerializer
+  
+
+
+
+'''
+@api_view(['GET'])
+def getPosts(request):
+    posts = Posts.objects.all()
+    serializer = PostsSerializer(posts, many =True)
+    return Response(serializer.data)
+'''
 # Create your views here.
 
 
@@ -168,12 +183,6 @@ def getAppointment(request):
     return Response(serializer.data)
 
 
-
-@api_view(['GET'])
-def getPosts(request):
-    posts = Posts.objects.all()
-    serializer = PostsSerializer(posts, many =True)
-    return Response(serializer.data)
 
 
 @api_view(['GET'])
