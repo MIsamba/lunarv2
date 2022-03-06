@@ -159,11 +159,26 @@ class Posts(models.Model):
 class Documents(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     type = models.CharField(max_length=200, null=True, blank=True)
+    attachment = models.FileField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return str(self.name)
+
+class DocumentList(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    type = models.CharField(max_length=200, null=True, blank=True)
+    attachment = models.FileField(null=True, blank=True)
+    _id = models.AutoField(primary_key=True, editable=False)
+    documents = models.ManyToManyField(Documents, related_name= "documents")
+
+    def __str__(self):
+        return str(self.name)
+
+
+
+
 
 class Assignments(models.Model):
     course = models.CharField(max_length=200, null=True, blank=True)

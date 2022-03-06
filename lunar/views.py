@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import serializers
 from rest_framework.response import Response
-from .models import Posts,Documents, User,Course, Session, Students,Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
-from .serializers import HeroSerializer,CourseSerializer,SessionSerializer,StudentSerializer,StudentsSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
+from .models import Posts,Documents,DocumentList,User,Course, Session, Students,Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
+from .serializers import DocumentListSerializer,HeroSerializer,CourseSerializer,SessionSerializer,StudentSerializer,StudentsSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -75,9 +75,31 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostsSerializer
   
 
+class AssignmentViewSet(viewsets.ModelViewSet):
+    queryset = Assignments.objects.all()
+    serializer_class= AssignmentsSerializer
+    
 
+
+class DocumentViewSet(viewsets.ModelViewSet):  
+    queryset  = Documents.objects.all()
+    serializer_class= DocumentsSerializer
+
+
+class DocumentListViewSet(viewsets.ModelViewSet):  
+    queryset  = DocumentList.objects.all()
+    serializer_class= DocumentListSerializer
 
 '''
+
+
+@api_view(['GET','POST'])
+def getAssignments(request):
+    assignments = Assignments.objects.all()
+    serializer = AssignmentsSerializer(assignments, many =True)
+    return Response(serializer.data)
+
+
 @api_view(['GET'])
 def getPosts(request):
     posts = Posts.objects.all()
@@ -183,17 +205,3 @@ def getAppointment(request):
     return Response(serializer.data)
 
 
-
-
-@api_view(['GET'])
-def getDocuments(request):
-    documents = Documents.objects.all()
-    serializer = DocumentsSerializer(documents, many =True)
-    return Response(serializer.data)
-
-
-@api_view(['GET','POST'])
-def getAssignments(request):
-    assignments = Assignments.objects.all()
-    serializer = AssignmentsSerializer(assignments, many =True)
-    return Response(serializer.data)

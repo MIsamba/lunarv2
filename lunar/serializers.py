@@ -4,7 +4,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.validators import UniqueTogetherValidator
 
 
-from .models import  Hero,Posts,Assignments,Documents, User,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
+from .models import  Hero,Posts,Assignments,Documents, DocumentList,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
 
 
 #User serializer
@@ -66,6 +66,33 @@ class  PostsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Posts
         fields = '__all__'
+
+
+
+#Assignments serializer
+class  AssignmentsSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model =  Assignments
+        fields = '__all__'
+
+
+
+#Documents serializer
+class  DocumentsSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model = Documents
+        fields = '__all__'
+
+class DocumentListSerializer(serializers.HyperlinkedModelSerializer):
+    documents = DocumentsSerializer(many = True)
+
+     
+    class Meta:
+        model = DocumentList
+        fields = '__all__'
+
 
     #def get_avater(self, obj):
      # return obj.avater.url
@@ -186,18 +213,3 @@ class  PostsSerializer(serializers.ModelSerializer):
      # return obj.avater.url
 
 '''
-
-#Documents serializer
-class  DocumentsSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Documents
-        fields = '__all__'
-
-#Assignments serializer
-class  AssignmentsSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model =  Assignments
-        fields = '__all__'
-
