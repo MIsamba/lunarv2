@@ -14,6 +14,8 @@ admin.site.register(Attendance)
 admin.site.register(AttendanceReport)
 admin.site.register(Appointment)
 admin.site.register(Documents)
+#admin.site.register(DocumentList)
 admin.site.register(Assignments)
 admin.site.register(Posts)
 admin.site.register(Hero)
+

@@ -1,21 +1,53 @@
 from django.shortcuts import render
 from rest_framework import serializers
 from rest_framework.response import Response
-from .models import Posts,Documents, User,Course, Session, Students,Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
-from .serializers import UserSerializer, UserSerializerWithToken,CourseSerializer,SessionSerializer,StudentSerializer,StudentsSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
+from .models import Posts,Documents,User,Course, Session, Students,Student, Teacher,Subject,Results,Attendance,AttendanceReport,Appointment,Documents,Assignments
+from .serializers import HeroSerializer,CourseSerializer,SessionSerializer,StudentSerializer,StudentsSerializer,TeacherSerializer,SubjectSerializer,ResultsSerializer,AttendanceSerializer,PostsSerializer,AssignmentsSerializer,DocumentsSerializer,AppointmentSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import status
+from rest_framework.permissions import IsAdminUser,IsAuthenticated
 
 
 from rest_framework import viewsets
-from .serializers import HeroSerializer
 from .models import Hero
 
 
 
 from django.contrib.auth.hashers import make_password
+
+from rest_framework.views import APIView
+
+class UserRecordView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, format=None):
+        heros = Hero.objects.all()
+        serializer = HeroSerializer(heros, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = HeroSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=ValueError):
+            serializer.create(validated_data=request.data)
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+        return Response(
+            {
+                "error": True,
+                "error_msg": serializer.error_messages,
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+
+
+
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -37,6 +69,43 @@ class HeroViewSet(viewsets.ModelViewSet):
     queryset = Hero.objects.all().order_by('name')
     serializer_class = HeroSerializer
 
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Posts.objects.all()
+    serializer_class = PostsSerializer
+  
+
+class AssignmentViewSet(viewsets.ModelViewSet):
+    queryset = Assignments.objects.all()
+    serializer_class= AssignmentsSerializer
+    
+
+
+class DocumentViewSet(viewsets.ModelViewSet):  
+    queryset  = Documents.objects.all()
+    serializer_class= DocumentsSerializer
+
+'''
+class DocumentListViewSet(viewsets.ModelViewSet):  
+    queryset  = DocumentList.objects.all()
+    serializer_class= DocumentListSerializer
+
+
+
+
+@api_view(['GET','POST'])
+def getAssignments(request):
+    assignments = Assignments.objects.all()
+    serializer = AssignmentsSerializer(assignments, many =True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getPosts(request):
+    posts = Posts.objects.all()
+    serializer = PostsSerializer(posts, many =True)
+    return Response(serializer.data)
+'''
 # Create your views here.
 
 
@@ -136,23 +205,3 @@ def getAppointment(request):
     return Response(serializer.data)
 
 
-
-@api_view(['GET'])
-def getPosts(request):
-    posts = Posts.objects.all()
-    serializer = PostsSerializer(posts, many =True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getDocuments(request):
-    documents = Documents.objects.all()
-    serializer = DocumentsSerializer(documents, many =True)
-    return Response(serializer.data)
-
-
-@api_view(['GET','POST'])
-def getAssignments(request):
-    assignments = Assignments.objects.all()
-    serializer = AssignmentsSerializer(assignments, many =True)
-    return Response(serializer.data)

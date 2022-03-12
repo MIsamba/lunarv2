@@ -23,8 +23,8 @@ class Students(models.Model):
 
 #hero model
 class Hero(models.Model):
-    name = models.CharField(max_length=60)
-    alias = models.CharField(max_length=60)
+    name = models.CharField(max_length=60,null=True)
+    alias = models.CharField(max_length=60,null=True)
     first_name = models.CharField(max_length=200,null=True,blank=True)
     username=models.CharField(max_length=200,null=True,blank=True)
     email=models.CharField(max_length=200,null=True,blank=True)
@@ -143,6 +143,7 @@ class Appointment(models.Model):
         return self.appointment_message
 
 
+
 class Posts(models.Model):
     description = models.CharField(max_length=200, null=True, blank=True)
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -157,12 +158,32 @@ class Posts(models.Model):
 
 class Documents(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
+    name_doc= models.CharField(max_length=200, null=True, blank=True)
     type = models.CharField(max_length=200, null=True, blank=True)
+    attachment = models.FileField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
         return str(self.name)
+'''
+  #  @property
+    def doxlist(self):
+        return self.dox_List.all()
+
+class DocumentList(models.Model):
+    name = models.CharField(max_length=200, null=True, blank=True)
+    type = models.CharField(max_length=200, null=True, blank=True)
+    attachment = models.FileField(null=True, blank=True)
+    _id = models.AutoField(primary_key=True, editable=False)
+    documents = models.ManyToManyField(Documents, related_name= "documents")
+
+    def __str__(self):
+        return str(self.name)
+
+'''
+
+
 
 class Assignments(models.Model):
     course = models.CharField(max_length=200, null=True, blank=True)

@@ -1,22 +1,45 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import  Hero,Posts,Assignments,Documents, User,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
+from rest_framework.validators import UniqueTogetherValidator
+
+
+from .models import  Hero,Posts,Assignments,Documents,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
+
 
 #User serializer
 
-class UserSerializer(serializers.ModelSerializer):
+#class UserSerializer(serializers.ModelSerializer):
    # name = serializers.SerializerMethodField(read_only=True)
+ #   class Meta:
+  #      model = User
+   #     fields = ['id','username','email']
+   
+
+
+"""class UserSerializer(serializers.ModelSerializer):
+
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
     class Meta:
         model = User
-        fields = ['id','username','email']
-    
-'''    def get_name(self, obj):
-        name = obj.first_name
-        if name == '':
-            name = obj.email
-        return name 
-'''
-class UserSerializerWithToken(UserSerializer):
+        fields = (
+            'id',
+            'password',
+        )
+        validators = [
+            UniqueTogetherValidator(
+                queryset=User.objects.all(),
+                fields=['id', 'password']
+            )
+        ]
+
+"""
+
+
+"""class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
   
     class Meta:
@@ -27,13 +50,75 @@ class UserSerializerWithToken(UserSerializer):
     def get_token(self, obj):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
-       
+
+"""
 
 #hero
 class HeroSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Hero
         fields = '__all__'
+
+
+class  PostsSerializer(serializers.HyperlinkedModelSerializer):
+    
+    
+    class Meta:
+        model = Posts
+        fields = '__all__'
+
+
+
+#Assignments serializer
+class  AssignmentsSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model =  Assignments
+        fields = '__all__'
+'''
+
+
+class DocumentListSerializer(serializers.HyperlinkedModelSerializer):
+    
+    class Meta:
+        model = DocumentList
+        fields = '__all__'
+'''
+#Documents serializer
+class  DocumentsSerializer(serializers.HyperlinkedModelSerializer):
+  #  documents = DocumentListSerializer(many = True)
+
+
+    class Meta:
+        model = Documents
+        fields = '__all__'
+
+
+    #def get_avater(self, obj):
+     # return obj.avater.url
+
+"""
+    def create(self, validated_data):
+        hero = Hero.objects.create_hero(**validated_data)
+        return hero
+
+    class Meta:
+        model = Hero
+        fields = '__all__' 
+        validators = [
+            UniqueTogetherValidator(
+                queryset=Hero.objects.all(),
+                fields=['id', 'password']
+            )
+        ]
+
+
+"""
+
+
+
+
+
 #course serializer
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -113,7 +198,7 @@ class  AppointmentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
+'''
 #Posts serializer
 class  PostsSerializer(serializers.ModelSerializer):
     
@@ -127,18 +212,4 @@ class  PostsSerializer(serializers.ModelSerializer):
     #def get_avater(self, obj):
      # return obj.avater.url
 
-
-#Documents serializer
-class  DocumentsSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Documents
-        fields = '__all__'
-
-#Assignments serializer
-class  AssignmentsSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model =  Assignments
-        fields = '__all__'
-
+'''
