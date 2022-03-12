@@ -4,7 +4,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.validators import UniqueTogetherValidator
 
 
-from .models import  Hero,Posts,Assignments,Documents, DocumentList,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
+from .models import  Hero,Posts,Assignments,Documents,Course,Session,Student,Students,Teacher,Subject,Results,Attendance,AttendanceReport,Appointment
 
 
 #User serializer
@@ -75,22 +75,22 @@ class  AssignmentsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model =  Assignments
         fields = '__all__'
+'''
 
-
-
-#Documents serializer
-class  DocumentsSerializer(serializers.HyperlinkedModelSerializer):
-    
-    class Meta:
-        model = Documents
-        fields = '__all__'
 
 class DocumentListSerializer(serializers.HyperlinkedModelSerializer):
-    documents = DocumentsSerializer(many = True)
-
-     
+    
     class Meta:
         model = DocumentList
+        fields = '__all__'
+'''
+#Documents serializer
+class  DocumentsSerializer(serializers.HyperlinkedModelSerializer):
+  #  documents = DocumentListSerializer(many = True)
+
+
+    class Meta:
+        model = Documents
         fields = '__all__'
 
 

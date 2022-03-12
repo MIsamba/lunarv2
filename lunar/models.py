@@ -158,6 +158,7 @@ class Posts(models.Model):
 
 class Documents(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
+    name_doc= models.CharField(max_length=200, null=True, blank=True)
     type = models.CharField(max_length=200, null=True, blank=True)
     attachment = models.FileField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
@@ -165,6 +166,10 @@ class Documents(models.Model):
 
     def __str__(self):
         return str(self.name)
+'''
+  #  @property
+    def doxlist(self):
+        return self.dox_List.all()
 
 class DocumentList(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -176,7 +181,7 @@ class DocumentList(models.Model):
     def __str__(self):
         return str(self.name)
 
-
+'''
 
 
 
