@@ -9,6 +9,8 @@ router.register(r'heroes', views.HeroViewSet)
 router.register(r'posts',views.PostViewSet)
 router.register(r'assignments',views.AssignmentViewSet)
 router.register(r'documents',views.DocumentViewSet)
+router.register(r'sessions',views.SessionViewSet)
+
 #router.register(r'documentslist',views.DocumentListViewSet)
 
 

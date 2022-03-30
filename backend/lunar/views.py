@@ -144,12 +144,11 @@ def getCourses(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-def getSession(request):
-    session = Session.objects.all()
-    serializer = SessionSerializer(session, many =True)
-    return Response(serializer.data)
-
+class SessionViewSet(viewsets.ModelViewSet):
+    queryset =  Session.objects.all()
+    serializer_class= SessionSerializer
+    
+    
 @api_view(['GET'])
 def getStudent(request):
     student = Student.objects.all()
