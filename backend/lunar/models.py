@@ -45,8 +45,7 @@ class Hero(models.Model):
 class Course(models.Model):
     course_code = models.IntegerField()
     course_name = models.CharField(max_length=200, null=True, blank=True)
-    course_total = models.CharField(max_length=200, null=True, blank=True)
-
+    course_total = models.IntegerField()
     def __str__(self):
         return self.course_name
 #Class model
@@ -57,6 +56,9 @@ class Session(models.Model):
     venue = models.CharField(max_length=200,null=False,blank=True)
     time = models.IntegerField()
     phone_no = models.IntegerField()
+    total_students = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
+    Assistance_tutor = models.CharField(max_length=200,null=False,blank=True)
 
     def __str__(self):
         return self.course_name
@@ -66,10 +68,16 @@ class Session(models.Model):
 #Student model
 class Student(models.Model):
     student_id =models.IntegerField()
-    student_group = models.CharField(max_length=200,null=True,blank=True)
+    student_number = models.CharField(max_length=200,null=True,blank=True)
     
     student_name = models.CharField(max_length=200,null=True,blank=True)
-    
+    student_year = models.DateField(null=True, blank=True,default=0)
+    student_email = models.CharField(max_length=200,null=True,blank=True)
+    student_status= models.CharField(max_length=200,null=True,blank=True)
+    student_name = models.CharField(max_length=200,null=True,blank=True)
+    attachment = models.FileField(null=True, blank=True)
+    appoitment_reason = models.CharField(max_length=200,null=True,blank=True)
+
     student_class_code = models.IntegerField(null=True, blank=True,default=0)
     
     student_total =  models.IntegerField(null=True,blank=True,default=0)
@@ -145,10 +153,11 @@ class Appointment(models.Model):
 
 
 class Posts(models.Model):
+    title = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=200, null=True, blank=True)
-    name = models.CharField(max_length=200, null=True, blank=True)
-    avater = models.ImageField(null=True, blank=True)
-    photo = models.FileField(null=True, blank=True)
+    post_name = models.CharField(max_length=200, null=True, blank=True)
+    media = models.ImageField(null=True, blank=True)
+    document = models.FileField(null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
 
@@ -189,9 +198,17 @@ class Assignments(models.Model):
     course = models.CharField(max_length=200, null=True, blank=True)
     type = models.CharField(max_length=200, null=True, blank=True)
     due = models.DateTimeField(null=True, blank=True)
+    class_name = models.CharField(max_length=200, null=True, blank=True)
+    assignment = models.CharField(max_length=200, null=True, blank=True)
+    student_name = models.CharField(max_length=200, null=True, blank=True)
+    date_submitted = models.CharField(max_length=200, null=True, blank=True)
+    report = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=200, null=True, blank=True)
     attachment = models.FileField(null=True, blank=True)
+    report = models.CharField(max_length=200, null=True, blank=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     _id = models.AutoField(primary_key=True, editable=False)
+
 
     def __str__(self):
         return str(self.course)
